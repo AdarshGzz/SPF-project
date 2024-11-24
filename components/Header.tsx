@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import logo from '@/public/logot.png';
+import logo from '@/app/logot.png';
 
 interface Product {
     _id: string;
