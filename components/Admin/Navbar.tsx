@@ -30,7 +30,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import logo from '@/public/Logop.png'
+// import logo from '@/public/Logop.png'
+import logo1 from '@/public/Logop.png'
 
 const Navbar: React.FC = () => {
     return (
@@ -39,7 +40,7 @@ const Navbar: React.FC = () => {
                 {/* Logo Section */}
                 <Link href="/admin" className="flex items-center space-x-3">
                     <Image
-                        src={logo}  // Replace with your actual logo path
+                        src={logo1}  // Replace with your actual logo path
                         alt="Admin Panel Logo"
                         width={120}  // Adjust width as needed
                         height={50}  // Adjust height as needed
