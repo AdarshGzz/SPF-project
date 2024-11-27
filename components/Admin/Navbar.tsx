@@ -30,7 +30,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import logo from '@/app/logop.png'
+import logo from '@/public/Logop.png'
 
 const Navbar: React.FC = () => {
     return (
