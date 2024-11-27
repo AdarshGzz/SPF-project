@@ -4,8 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import logo from '@/app/logop.png';
-import { Button } from '@/components/ui/button'; // Assuming you have a Button component in shadcn
+import logo from '../app/Logop.png';
 import { Input } from '@/components/ui/input'; // Assuming you have an Input component in shadcn
 
 
