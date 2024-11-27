@@ -1,7 +1,8 @@
+
 // "use client";
 // import { useRouter } from 'next/navigation';
 // import React from 'react';
-// import Image from 'next/image'; // Use Next.js Image component for optimization
+// import Image from 'next/image';
 
 // interface ProductCardProps {
 //     productId: string;
@@ -24,7 +25,6 @@
 // }) => {
 //     const router = useRouter();
 
-//     // Function to truncate title
 //     const truncateTitle = (title: string, maxLength: number) => {
 //         if (title.length > maxLength) {
 //             return `${title.substring(0, maxLength)}...`;
@@ -34,24 +34,29 @@
 
 //     return (
 //         <div
-//             className={`relative border rounded-lg shadow-lg overflow-hidden group cursor-pointer ${className}`}
+//             className={`
+//                 w-[300px] h-[400px] 
+//                 relative border rounded-lg shadow-lg 
+//                 overflow-hidden group cursor-pointer 
+//                 flex flex-col bg-white
+//                 ${className}`}
 //             onClick={() => router.push(`/Product/${productId}`)}
 //         >
-//             {/* Image Container with Fixed Aspect Ratio */}
-//             <div className="relative w-full h-0 pb-[100%]"> {/* 1:1 Aspect Ratio */}
+//             {/* Image Container with Fixed Height */}
+//             <div className="relative w-full h-[300px] flex-shrink-0">
 //                 <Image
 //                     src={image}
 //                     alt={title}
 //                     fill
-//                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-//                     className="absolute inset-0 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+//                     sizes="300px"
+//                     className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
 //                     priority={false}
 //                 />
 //             </div>
 
-//             {/* Product Details */}
-//             <div className="p-4">
-//                 <h2 className="text-lg font-semibold mb-2 h-12 overflow-hidden">
+//             {/* Product Details with Fixed Height */}
+//             <div className="p-4 h-[100px] flex flex-col justify-between">
+//                 <h2 className="text-lg font-semibold line-clamp-2">
 //                     {truncateTitle(title, maxTitleLength)}
 //                 </h2>
 //                 <div className="flex items-baseline">
@@ -66,8 +71,8 @@
 
 //             {/* Hover Effect */}
 //             <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//                 <button className="text-white font-semibold py-2 px-4 rounded">
-//                     Details
+//                 <button className="bg-white text-gray-800 font-semibold py-2 px-6 rounded hover:bg-gray-100 transition-colors">
+//                     View Details
 //                 </button>
 //             </div>
 //         </div>
@@ -80,10 +85,14 @@
 
 
 
+
+
 "use client";
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button'; // Importing Button from Shadcn
+import { Eye } from 'lucide-react'; // Importing Eye icon from Lucide React
 
 interface ProductCardProps {
     productId: string;
@@ -102,7 +111,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     previousPrice,
     className,
     productId,
-    maxTitleLength = 30,
+    maxTitleLength = 22,
 }) => {
     const router = useRouter();
 
@@ -119,7 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 w-[300px] h-[400px] 
                 relative border rounded-lg shadow-lg 
                 overflow-hidden group cursor-pointer 
-                flex flex-col bg-white
+                flex flex-col bg-white transition-transform transform hover:scale-105
                 ${className}`}
             onClick={() => router.push(`/Product/${productId}`)}
         >
@@ -130,18 +139,18 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     alt={title}
                     fill
                     sizes="300px"
-                    className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                    className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
                     priority={false}
                 />
             </div>
 
             {/* Product Details with Fixed Height */}
-            <div className="p-4 h-[100px] flex flex-col justify-between">
-                <h2 className="text-lg font-semibold line-clamp-2">
+            <div className="p-4 h-[100px] flex flex-col justify-between bg-[#fafaff]">
+                <h2 className="text-lg font-semibold line-clamp-2 text-[#2f3b69]">
                     {truncateTitle(title, maxTitleLength)}
                 </h2>
                 <div className="flex items-baseline">
-                    <span className="text-xl font-bold text-gray-900">{price}</span>
+                    <span className="text-xl font-bold text-[#2f3b69]">{price}</span>
                     {previousPrice && (
                         <span className="ml-2 text-sm text-gray-500 line-through">
                             {previousPrice}
@@ -151,10 +160,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </div>
 
             {/* Hover Effect */}
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button className="bg-white text-gray-800 font-semibold py-2 px-6 rounded hover:bg-gray-100 transition-colors">
+            <div className="absolute inset-0 flex items-center justify-center bg-[#2f3b69] bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Button
+                    onClick={(e:any) => {
+                        e.stopPropagation(); // Prevents the card click event
+                        router.push(`/Product/${productId}`);
+                    }}
+                    className="flex items-center bg-white text-[#2f3b69] font-semibold py-2 px-4 rounded hover:bg-gray-100 transition-colors"
+                >
+                    <Eye className="mr-2" /> {/* Eye icon */}
                     View Details
-                </button>
+                </Button>
             </div>
         </div>
     );

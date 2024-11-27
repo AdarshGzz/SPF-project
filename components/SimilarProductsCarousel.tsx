@@ -1,116 +1,4 @@
 
-// "use client";
-
-// import React, { useEffect, useState } from 'react';
-// import ProductCard from './ProductCard';
-
-// type Product = {
-//     _id: string;
-//     images: string[];
-//     title: string;
-//     price: string;
-//     discountedPrice?: number;
-// };
-
-// const SimilarProductsList = ({ category }: any) => {
-//     const [products, setProducts] = useState<Product[]>([]);
-//     const [randomProducts, setRandomProducts] = useState<Product[]>([]);
-//     const [isLoading, setIsLoading] = useState(true);
-//     const [error, setError] = useState<string | null>(null);
-
-//     // Function to get 6 random products
-//     const getRandomProducts = (allProducts: Product[]) => {
-//         // If total products are 6 or less, return all
-//         if (allProducts.length <= 6) return allProducts;
-
-//         // Create a copy of the products array to shuffle
-//         const shuffled = [...allProducts];
-
-//         // Fisher-Yates shuffle algorithm
-//         for (let i = shuffled.length - 1; i > 0; i--) {
-//             const j = Math.floor(Math.random() * (i + 1));
-//             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-//         }
-
-//         // Return first 6 products
-//         return shuffled.slice(0, 6);
-//     };
-
-//     useEffect(() => {
-//         if (category) {
-//             const fetchProducts = async () => {
-//                 setIsLoading(true);
-//                 setError(null);
-//                 try {
-//                     const response = await fetch(`/api/product/get-products-by-category/${category}`);
-//                     if (!response.ok) {
-//                         throw new Error('Failed to fetch products');
-//                     }
-//                     const data = await response.json();
-
-//                     // Set all products
-//                     setProducts(data);
-
-//                     // Set 6 random products
-//                     setRandomProducts(getRandomProducts(data));
-//                 } catch (error) {
-//                     setError('Failed to load products. Please try again later.');
-//                     console.error('Error fetching products:', error);
-//                 } finally {
-//                     setIsLoading(false);
-//                 }
-//             };
-
-//             fetchProducts();
-//         }
-//     }, [category]);
-
-//     if (error) {
-//         return (
-//             <div className="min-h-[80vh] flex items-center justify-center">
-//                 <div className="text-center p-6 bg-red-50 rounded-lg">
-//                     <p className="text-red-600">{error}</p>
-//                     <button
-//                         onClick={() => window.location.reload()}
-//                         className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
-//                     >
-//                         Retry
-//                     </button>
-//                 </div>
-//             </div>
-//         );
-//     }
-
-//     // If no products, don't render anything
-//     if (randomProducts.length === 0) return null;
-
-//     return (
-//         <div className="p-6 bg-gray-100">
-//             <div className="flex justify-between items-center mb-4">
-//                 <h2 className="text-xl font-bold">Similar Products</h2>
-//             </div>
-//             <div className="grid grid-cols-4 gap-4">
-//                 {randomProducts.map((product, index) => (
-//                     <ProductCard
-//                         key={product._id || index}
-//                         productId={product._id}
-//                         image={product.images[0]}
-//                         title={product.title}
-//                         previousPrice={`₹ ${product.price}`}
-//                         price={`₹ ${product.discountedPrice}`}
-//                     />
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default SimilarProductsList;
-
-
-
-
-
 
 "use client";
 
@@ -239,11 +127,11 @@ const SimilarProductsList = ({ category }: any) => {
     if (randomProducts.length === 0) return null;
 
     return (
-        <div className="p-6 bg-gray-100">
+        <div className=" p-2 md:p-6 bg-gray-100">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Similar Products</h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
                 {randomProducts.map((product, index) => (
                     isMobile ? (
                         <MiniCard
@@ -251,8 +139,8 @@ const SimilarProductsList = ({ category }: any) => {
                             productId={product._id}
                             image={product.images[0]}
                             title={product.title}
-                            previousPrice={`₹ ${product.price}`}
-                            price={`₹ ${product.discountedPrice}`}
+                            previousPrice={product.price}
+                            price={product.discountedPrice}
                         />
                     ) : (
                         <ProductCard
