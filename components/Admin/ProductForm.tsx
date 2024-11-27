@@ -458,7 +458,7 @@ export default function ProductForm({
                     <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a category" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className='bg-white'>
                         {categories.map((category) => (
                             <SelectItem key={category._id} value={category._id}>
                                 {category.name}

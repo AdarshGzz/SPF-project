@@ -953,8 +953,9 @@ export default function OrdersPage() {
                     <Dialog
                         open={!!orderToDelete}
                         onOpenChange={() => setOrderToDelete(null)}
+                        
                     >
-                        <DialogContent>
+                        <DialogContent className='bg-white'>
                             <DialogHeader>
                                 <DialogTitle>Confirm Delete</DialogTitle>
                                 <DialogDescription>
