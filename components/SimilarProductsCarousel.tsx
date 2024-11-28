@@ -127,7 +127,7 @@ const SimilarProductsList = ({ category }: any) => {
     if (randomProducts.length === 0) return null;
 
     return (
-        <div className=" p-2 md:p-0 ">
+        <div className="  ">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Similar Products</h2>
             </div>
